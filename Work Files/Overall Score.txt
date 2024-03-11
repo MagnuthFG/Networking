@@ -1,0 +1,40 @@
+
+Overall Score:
+	I aimed for G with ??? points
+	
+
+09. Player Death:[Points: 1]
+    Health component:
+		Exposed a max health variable 
+		
+		Added a OnDeath and OnRespawn events, which toggles 
+		scripts on the player, rather than destroying and 
+		instantiating (which is done on both host and client)
+		
+		Fixed so that OnHealthChanged method is called when current
+		health is changed, which call the on death and on respawn
+		events based on circumstance
+
+	ServerSingleBullet prefab:
+		PS. Increased damage for quicker testing
+		
+
+11. Limited Respawn:[Points: 2]
+	Health component:
+		Added a Respawn method that refills player health,
+		which is only done on the host/server side
+	
+	PlayerRespawn component: 
+		Created a player respawn component that handles
+		respawn delay, count and random respawn position
+		
+		Subscribes to CurrentHealth.OnValueChanged and checks
+		the current health and starts respawning if dead and
+		has spawns left (only on host/server side)
+		
+	FireAction component:
+		Changed so player can't fire when component is disabled
+	
+	PlayerController component:
+		Fixed so OnFire doesn't throw errors if it has no
+		events to invoke

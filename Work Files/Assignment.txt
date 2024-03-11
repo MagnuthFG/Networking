@@ -1,0 +1,65 @@
+6 points for G , 15 points for VG 
+
+1. **Overhead Names:** [Points: 1]
+   - Today, we saved the names of the clients who joined a game.
+   - The server stored this data when we executed the `ConnectionApprovalCallback`.
+   - We stored all the client information inside a static class called `SaveClientInformationManager`, within a list.
+   - We also exposed some methods there.
+   - The task is to enable the server to write the clients' names on top of their respective ships.
+   - A helpful hint is to follow a similar approach as we did with the health UI bar.
+
+2. **Health Packs:**  [Points: 1]
+   - Currently, the ships shoot each other and lose health.
+   - I would like to add health packs to the game, which don't need to respawn.
+   - They will be static and placed on the map.
+   - When a ship collides with a health pack, its health should increase by a specific amount.
+
+3. **Sprite Renderer:**  [Points: 1]
+   - The ship has a sprite renderer.
+   - Change the sprite when the ship moves or has velocity.
+   - You can grant authority to the client to perform this action by using the `NetworkVariable`.
+
+4. **Limited Ammo:**  [Points: 1]
+   - Currently, we have unlimited ammo.
+   - I would like to limit the firing capability by giving each ship a finite amount of ammunition.
+   - Let's say 10 shots per ship.
+   - Once the ammunition is depleted, the ship will be unable to fire.
+
+5. **Shot Timer:**  [Points: 1]
+   - Implement a timer between shots, and the server should check it.
+
+6. **Ammo Packs:**  [Points: 1]
+   - Introduce ammo packs to the game that can recharge a ship's ammunition upon collision.
+   - When a ship collides with an ammo pack, its ammo count should be replenished.
+
+7. **Cheat Detection:**  [Points: 4]
+   - Implement cheat detection mechanisms on the server side to address potential issues:
+      a. For unauthorized movements initiated by a player OR Detect and rectify incorrect bullet locations to prevent misuse.
+      b. Notify all players that X ( his username is a cheater ) and Kick him out of the game
+
+8. **Shield Power-Up:**  [Points: 2]
+   - Develop a shield power-up that absorbs two shots without causing damage to the player.
+   - The shield should automatically disappear after blocking two shots.
+
+9. **Player Death:** [Points: 1]
+   - When the player's health drops below zero, trigger the player's death.
+
+10. **Unlimited Respawn:** [Points: 1]
+    - Allow the player to respawn an unlimited number of times.
+
+11. **Limited Respawn:**  [Points: 2]
+    - The player can respawn a limited number of times, with a set maximum amount. 
+
+12. **Homing Missile:**  [Points: 3]
+    - Introduce a homing missile mechanic where the owner initiates the launch request to the server.
+    - Upon receiving the request, the server notifies all clients to create a homing missile.
+    - The homing missile takes 1 second to launch and then autonomously moves towards the closest enemy ship.
+
+13. **Live Scoreboard:**  [Points: 2]
+    - Implement a live scoreboard to track and display the number of kills for each player in real-time.
+
+14. **Burst of Speed Power-Up:** [Points: 1]
+    - Introduce a burst of speed power-up that grants the player increased movement speed for a limited duration, enhancing agility for a short period.
+
+
+A Side Project In Any Language that has networking / Multiplayer grants you  [Points: 5]
