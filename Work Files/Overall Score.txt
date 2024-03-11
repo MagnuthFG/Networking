@@ -3,7 +3,37 @@ Overall Score:
 	I aimed for G with ??? points
 	
 
-09. Player Death:[Points: 1]
+02. Health Packs: [Points: 1]
+	Health prefab:
+		Created a health pack prefab
+		
+	Health component:
+		Added a Heal method
+		
+	HealthPack component:
+		Created a health pack component that heals the
+		player when the player enters the trigger
+		
+		
+03. Sprite Renderer: [Points: 1]
+	WaterFoam child gameobject:
+		Added a water foam sprite gameobject to player prefab
+	
+	PlayerController component:
+		Added a isMoving network variable and changed the read
+		and write permissions of it. I also added a foam renderer
+		variable
+		
+		Created a OnMovementChanged method that toggles the foam
+		sprite renderer, when the isMoving variable changes
+		Couldn't find the right sprite so used the empty water 
+		foam one instead rather than changing the player's renderer
+		
+		I also fixed so that inputs are ignored if the controller
+		component is disabled
+		
+
+09. Player Death: [Points: 1]
     Health component:
 		Exposed a max health variable 
 		
@@ -19,7 +49,7 @@ Overall Score:
 		PS. Increased damage for quicker testing
 		
 
-11. Limited Respawn:[Points: 2]
+11. Limited Respawn: [Points: 2]
 	Health component:
 		Added a Respawn method that refills player health,
 		which is only done on the host/server side

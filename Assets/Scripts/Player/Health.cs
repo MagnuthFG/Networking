@@ -31,11 +31,23 @@ public class Health : NetworkBehaviour
         CurrentHealth.Value = health;
     }
 
+    public void Heal(int amount){
+        int health = CurrentHealth.Value;
+        if (health == _maxHealth) return;
+
+        amount = amount < 0 ? -amount : amount;
+        health = Mathf.Clamp(health + amount, health, _maxHealth);
+
+        CurrentHealth.Value = health;
+    }
+
     public void Respawn(){
         CurrentHealth.Value = _maxHealth;
     }
 
     private void OnHealthChanged(int previous, int current){
+        if (current == previous) return;
+
         if (current == 0)
             m_OnDeath.Invoke();
 

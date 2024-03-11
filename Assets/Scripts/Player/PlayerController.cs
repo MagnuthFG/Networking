@@ -1,12 +1,21 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using SF = UnityEngine.SerializeField;
 using UnityEngine.InputSystem;
 using static PlayerInput;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : NetworkBehaviour, IPlayerActions
-{
+{    
+    [Header("Settings")]
+    [SF] private float movementSpeed = 5f;
+    [SF] private float shipRotationSpeed = 100f;
+    [SF] private float turretRotationSpeed = 4f;
+
+    [Header("Visuals")]
+    [SF] private SpriteRenderer _foam = null;
+
     private PlayerInput _playerInput;
     private Vector2 _moveInput = new();
     private Vector2 _cursorLocation;
@@ -15,53 +24,58 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private Rigidbody2D _rb;
 
     private Transform turretPivotTransform;
-
-
     public UnityAction<bool> onFireEvent;
 
-    [Header("Settings")]
-    [SerializeField] private float movementSpeed = 5f;
-    [SerializeField] private float shipRotationSpeed = 100f;
-    [SerializeField] private float turretRotationSpeed = 4f;
+    private NetworkVariable<bool> _isMoving = new(default, 
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+    );
 
 
-    public override void OnNetworkSpawn()
-    {
+    public override void OnNetworkSpawn(){
+        _isMoving.OnValueChanged += OnMovmentChanged;
+
         if (!IsOwner) return;
 
-        if (_playerInput == null)
-        {
+        if (_playerInput == null){
             _playerInput = new();
             _playerInput.Player.SetCallbacks(this);
         }
         _playerInput.Player.Enable();
 
-        _rb = GetComponent<Rigidbody2D>();
         _shipTransform = transform;
+        _rb = GetComponent<Rigidbody2D>();
+
         turretPivotTransform = transform.Find("PivotTurret");
         if (turretPivotTransform == null) Debug.LogError("PivotTurret is not found", gameObject);
     }
 
+    public void OnFire(InputAction.CallbackContext context){
+        if (!enabled) return;
 
-
-
-
-    public void OnFire(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
+        if (context.performed){
             onFireEvent?.Invoke(true);
-        }
-        else if (context.canceled)
-        {
+
+        } else if (context.canceled){
             onFireEvent?.Invoke(false);
         }
     }
 
-    public void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
+    public void OnMove(InputAction.CallbackContext context){
+        if (!enabled) return;
         _moveInput = context.ReadValue<Vector2>();
+
+        bool moving = 
+            _moveInput.x != 0 || 
+            _moveInput.y != 0;
+
+        _isMoving.Value = moving;
     }
+
+    public void OnAim(InputAction.CallbackContext context){
+        _cursorLocation = context.ReadValue<Vector2>();
+    }
+
 
     private void FixedUpdate()
     {
@@ -69,6 +83,7 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
         _rb.velocity = transform.up * _moveInput.y * movementSpeed;
         _rb.MoveRotation(_rb.rotation + _moveInput.x * -shipRotationSpeed * Time.fixedDeltaTime);
     }
+
     private void LateUpdate()
     {
         if (!IsOwner) return;
@@ -78,9 +93,9 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
         turretPivotTransform.up = currentDirection;
     }
 
-    public void OnAim(InputAction.CallbackContext context)
-    {
-        _cursorLocation = context.ReadValue<Vector2>();
+
+    private void OnMovmentChanged(bool previous, bool current){
+        _foam.enabled = current;
     }
 
 }
