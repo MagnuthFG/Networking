@@ -237,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc40493fc07c0984c99b996f2ca6a62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxAmmoCount: 10
+  _startingAmmoCount: 10
+  _maxAmmoCount: 15
   _refireDelay: 1.5
   playerController: {fileID: 5210888314493061672}
   clientSingleBulletPrefab: {fileID: 6137059209113163129, guid: eb95cbada454d9c4c8bd843bb9424b33, type: 3}

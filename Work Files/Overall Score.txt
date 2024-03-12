@@ -1,9 +1,9 @@
 
 Overall Score:
-	I aimed for G with 7 points
+	I aimed for G with 8 points
 	
 
-02. Health Packs: [Points: 1]
+02.	Health Packs: [Points: 1]
 	Health prefab:
 		Created a health pack prefab
 		
@@ -15,7 +15,7 @@ Overall Score:
 		player when the player enters the trigger
 		
 		
-03. Sprite Renderer: [Points: 1]
+03.	Sprite Renderer: [Points: 1]
 	WaterFoam child game object:
 		Added a water foam sprite game object to player prefab
 	
@@ -33,7 +33,7 @@ Overall Score:
 		component is disabled
 		
 
-04. Limited Ammo: [Points: 1]
+04.	Limited Ammo: [Points: 1]
 	FiringAction component:
 		Added a max ammo count variable and an ammo count 
 		network variable. Set so only server can modify it
@@ -42,7 +42,7 @@ Overall Score:
 		ShootBulletServerRpc I subtract ammo count
 	
 
-05. Shot Timer: [Points: 1]
+05.	Shot Timer: [Points: 1]
 	FiringAction component:
 		Added a refire delay variable and a fire delay 
 		network variable. Set so only server can modify it
@@ -54,7 +54,21 @@ Overall Score:
 		both server and client
 		
 
-09. Player Death: [Points: 1]
+06.	Ammo Packs: [Points: 1]
+	Ammo prefab:
+		Created an ammo pack prefab
+		
+	FiringAction component:
+		Added a starting ammo count variable and
+		added an AddAmmo method
+		
+	AmmoPack component:
+		Created an ammo pack component that adds ammo
+		to FiringAction component when player enters 
+		the trigger. Also respawns ammo randomly
+
+   
+09.	Player Death: [Points: 1]
     Health component:
 		Exposed a max health variable 
 		
@@ -70,7 +84,7 @@ Overall Score:
 		PS. Increased damage for quicker testing
 		
 
-11. Limited Respawn: [Points: 2]
+11.	Limited Respawn: [Points: 2]
 	Health component:
 		Added a Respawn method that refills player health,
 		which is only done on the host/server side

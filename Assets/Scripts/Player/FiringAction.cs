@@ -5,7 +5,8 @@ using UnityEngine;
 public class FiringAction : NetworkBehaviour
 {
     [Header("Settings")]
-    [SF] private int _maxAmmoCount = 10;
+    [SF] private int _startingAmmoCount = 10;
+    [SF] private int _maxAmmoCount = 15;
     [SF] private float _refireDelay = 1.5f;
 
     [Header("References")]
@@ -21,7 +22,7 @@ public class FiringAction : NetworkBehaviour
 
     public override void OnNetworkSpawn(){
         _netManager = NetworkManager.Singleton;
-        _ammoCount.Value = _maxAmmoCount;
+        _ammoCount.Value = _startingAmmoCount;
     }
 
     private void OnEnable(){
@@ -31,6 +32,15 @@ public class FiringAction : NetworkBehaviour
         playerController.onFireEvent -= Fire;
     }
 
+
+    public void AddAmmo(int amount){
+        var ammo = _ammoCount.Value;
+        
+        amount = amount < 0 ? -amount : amount;
+        ammo = Mathf.Clamp(ammo + amount, ammo, _maxAmmoCount);
+
+        _ammoCount.Value = ammo;
+    }
 
     private void Fire(bool isShooting){
         if (!isShooting) return;
