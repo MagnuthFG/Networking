@@ -26,7 +26,7 @@ public class PlayerController : NetworkBehaviour, IPlayerActions
     private Transform turretPivotTransform;
     public UnityAction<bool> onFireEvent;
 
-    private NetworkVariable<bool> _isMoving = new(default, 
+    private NetworkVariable<bool> _isMoving = new (default, 
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner
     );

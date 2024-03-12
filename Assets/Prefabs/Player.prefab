@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1749074894
+  GlobalObjectIdHash: 3519813835
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -224,7 +224,7 @@ MonoBehaviour:
   movementSpeed: 5
   shipRotationSpeed: 100
   turretRotationSpeed: 4
-  _foamRenderer: {fileID: 2854451628951025822}
+  _foam: {fileID: 2854451628951025822}
 --- !u!114 &7262709456020717196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc40493fc07c0984c99b996f2ca6a62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxAmmoCount: 10
+  _refireDelay: 1.5
   playerController: {fileID: 5210888314493061672}
   clientSingleBulletPrefab: {fileID: 6137059209113163129, guid: eb95cbada454d9c4c8bd843bb9424b33, type: 3}
   serverSingleBulletPrefab: {fileID: 2699881094025181072, guid: 5a0f856cf7b9d3c4abbaba622df545d5, type: 3}

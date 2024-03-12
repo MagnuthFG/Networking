@@ -14,6 +14,8 @@ public class HealthPack : NetworkBehaviour
             health.Heal(_healAmount);
         }
         var netObj = GetComponent<NetworkObject>();
-        netObj.Despawn();
+
+        if (netObj != null && netObj.IsSpawned == true)
+            netObj.Despawn();
     }
 }

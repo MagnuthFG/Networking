@@ -1,6 +1,6 @@
 
 Overall Score:
-	I aimed for G with ??? points
+	I aimed for G with 7 points
 	
 
 02. Health Packs: [Points: 1]
@@ -16,8 +16,8 @@ Overall Score:
 		
 		
 03. Sprite Renderer: [Points: 1]
-	WaterFoam child gameobject:
-		Added a water foam sprite gameobject to player prefab
+	WaterFoam child game object:
+		Added a water foam sprite game object to player prefab
 	
 	PlayerController component:
 		Added a isMoving network variable and changed the read
@@ -31,6 +31,27 @@ Overall Score:
 		
 		I also fixed so that inputs are ignored if the controller
 		component is disabled
+		
+
+04. Limited Ammo: [Points: 1]
+	FiringAction component:
+		Added a max ammo count variable and an ammo count 
+		network variable. Set so only server can modify it
+		
+		Then in Fire method I check ammo count and inside
+		ShootBulletServerRpc I subtract ammo count
+	
+
+05. Shot Timer: [Points: 1]
+	FiringAction component:
+		Added a refire delay variable and a fire delay 
+		network variable. Set so only server can modify it
+
+		Updated Fire method to take this into account
+		and ShootBulletServerRpc, which sets the new fire delay
+		
+		Used NetworkManager time so that its the same across
+		both server and client
 		
 
 09. Player Death: [Points: 1]
